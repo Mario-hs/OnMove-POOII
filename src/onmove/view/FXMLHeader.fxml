@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="onmove.controller.FXMLHeaderController">
+    <stylesheets>
+        <URL value="@/onmove/styles/fxmlheader.css" />
+    </stylesheets>
+   <children>
+      <VBox prefHeight="550.0" prefWidth="800.0">
+         <children>
+            <MenuBar fx:id="menuBar" prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: none;">
+               <menus>
+                  <Menu mnemonicParsing="false" style="-fx-padding: 5 20; -fx-brackground-color: #5965E0;">
+                     <graphic>
+                        <ImageView fx:id="home" fitHeight="26.0" fitWidth="130.0" onMouseClicked="#handleHome" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/Logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-padding: 5 30 5 30; -fx-min-height: 35; -fx-font-family: System;" text="Cadastros">
+                     <items>
+                        <MenuItem fx:id="cadastrosBicicletas" mnemonicParsing="false" onAction="#handleCadastrosBicicletas" text="Bicicletas" />
+                        <MenuItem fx:id="cadastrosClientes" mnemonicParsing="false" onAction="#handleCadastrosClientes" text="Clientes" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-padding: 5 30 5 30; -fx-min-height: 35; -fx-font-family: System;" text="Processos">
+                     <items>
+                        <MenuItem fx:id="processosAluguel" mnemonicParsing="false" onAction="#handleProcessosAluguel" text="Aluguel" />
+                        <MenuItem fx:id="menuItemProcessosDevolucao" mnemonicParsing="false" text="Devolução" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-padding: 5 30 5 30; -fx-min-height: 35; -fx-font-family: System;" text="Gráficos ">
+                     <items>
+                        <MenuItem fx:id="menuItemGraficosAluguelPorMes" mnemonicParsing="false" text="Aluguel por Mês" />
+                        <MenuItem fx:id="menuItemGraficosAluguelPorAno" mnemonicParsing="false" text="Aluguel por Ano" />
+                        <MenuItem fx:id="menuItemGraficosAluguelPorCliente" mnemonicParsing="false" text="Aluguel por Cliente" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" style="-fx-padding: 5 30 5 30; -fx-min-height: 35; -fx-font-family: System;" text="Relatórios">
+                     <items>
+                        <MenuItem fx:id="menuItemRelatoriosQuantidadeBicicletasEstoque" mnemonicParsing="false" text="QTD de Bicicletas em Estoque" />
+                        <MenuItem fx:id="menuItemRelatoriosQuantidadeBicicletasAlugada" mnemonicParsing="false" text="QTD de Bicicletas Alugadas" />
+                        <MenuItem fx:id="menuItemRelatoriosQuantidadeBicicletasDisponivel" mnemonicParsing="false" text="QTD de Bicicletas Disponivéis" />
+                     </items>
+                  </Menu>
+               </menus>
+               <padding>
+                  <Insets left="85.0" top="10.0" />
+               </padding>
+            </MenuBar>
+            <AnchorPane fx:id="anchorPaneBody" prefHeight="450.0" prefWidth="800.0" />
+            <AnchorPane fx:id="anchorPaneButtons" prefHeight="50.0" prefWidth="800.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

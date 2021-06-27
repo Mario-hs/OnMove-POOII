@@ -1,9 +1,12 @@
 package onmove.model.domain;
 
 import java.io.Serializable;
+import javafx.stage.Stage;
 
 public class Cliente implements Serializable {
 
+    public static Stage stage;
+    
     private int cdCliente;
     private String nome;
     private String cpf;
@@ -54,5 +57,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return this.nome;
     }
-    
+
 }

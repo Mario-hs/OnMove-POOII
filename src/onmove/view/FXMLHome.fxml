@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="onmove.controller.FXMLHomeController">
+    <stylesheets>
+        <URL value="@/onmove/styles/fxmlmain.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane fx:id="anchorPaneBody" layoutY="33.0" prefHeight="450.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="194.0" layoutX="294.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/Logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="394.0" fitWidth="558.0" layoutX="234.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/bike/bike.png" />
+               </image>
+            </ImageView>
+            <MenuButton layoutX="40.0" layoutY="97.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="54.0" prefWidth="207.0" style="-fx-background-color: #5965E0;" text="Cadastros" textFill="WHITE">
+               <items>
+                  <MenuItem fx:id="cadastrosBicicletas" mnemonicParsing="false" onAction="#handleCadastrosBicicletas" text="Bicicletas" />
+                  <MenuItem fx:id="cadastrosClientes" mnemonicParsing="false" onAction="#handleCadastrosClientes" text="Clientes" />
+               </items>
+               <font>
+                  <Font name="Montserrat Medium" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </MenuButton>
+            <MenuButton layoutX="40.0" layoutY="180.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="54.0" prefWidth="207.0" style="-fx-background-color: #5965E0;" text="Processos" textFill="WHITE">
+               <items>
+                  <MenuItem fx:id="processosAluguel" mnemonicParsing="false" onAction="#handleProcessosAluguel" text="Aluguel" />
+                  <MenuItem fx:id="menuItemProcessosDevolucao" mnemonicParsing="false" onAction="#handleMenuItemProcessosDevolucao" text="Devolução" />
+               </items>
+               <font>
+                  <Font name="Montserrat Medium" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </MenuButton>
+            <MenuButton layoutX="40.0" layoutY="262.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="54.0" prefWidth="207.0" style="-fx-background-color: #5965E0;" text="Gráficos" textFill="WHITE">
+               <items>
+                  <MenuItem fx:id="menuItemGraficosAluguelPorMes" mnemonicParsing="false" onAction="#handleMenuItemGraficosAluguelPorMes" text="Aluguel por Mês" />
+                  <MenuItem fx:id="menuItemGraficosAluguelPorAno" mnemonicParsing="false" onAction="#handleMenuItemGraficosAluguelPorAno" text="Aluguel por Ano" />
+                  <MenuItem fx:id="menuItemGraficosAluguelPorCliente" mnemonicParsing="false" onAction="#handleMenuItemGraficosAluguelPorCliente" text="Aluguel por Cliente" />
+               </items>
+               <font>
+                  <Font name="Montserrat Medium" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </MenuButton>
+            <MenuButton layoutX="40.0" layoutY="345.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="54.0" prefWidth="207.0" style="-fx-background-color: #5965E0;" text="Relatórios" textFill="WHITE">
+               <items>
+                  <MenuItem fx:id="menuItemRelatoriosQuantidadeBicicletasEstoque" mnemonicParsing="false" onAction="#handleMenuItemRelatoriosQuantidadeBicicletas" text="Quantidade de Bicicletas em Estoque" />
+                  <MenuItem fx:id="menuItemRelatoriosQuantidadeBicicletasAlugadas" mnemonicParsing="false" onAction="#handleMenuItemRelatoriosQuantidadeBicicletasAlugadas" text="Quantidade de Bicicletas Alugadas" />
+                  <MenuItem fx:id="menuItemRelatoriosQuantidadeBicicletasDisponivel" mnemonicParsing="false" onAction="#handleMenuItemRelatoriosQuantidadeBicicletasDisponiveis" text="Quantidade de Bicicletas Disponíveis" />
+               </items>
+               <font>
+                  <Font name="Montserrat Medium" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </MenuButton>
+            <Button fx:id="btnSair" alignment="BASELINE_LEFT" layoutX="40.0" layoutY="425.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="207.0" style="-fx-background-color: #5965E0;" text="   Sair" textFill="WHITE">
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font name="Montserrat Medium" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
