@@ -1,4 +1,3 @@
-//package outros.model.domain;
 package onmove.model.domain;
 
 import java.io.Serializable;
@@ -50,7 +49,7 @@ public class ItemDeAluguel implements Serializable {
         return aluguel;
     }
 
-    public void setVenda(Aluguel aluguel) {
+    public void setAluguel(Aluguel aluguel) {
         this.aluguel = aluguel;
     }
     

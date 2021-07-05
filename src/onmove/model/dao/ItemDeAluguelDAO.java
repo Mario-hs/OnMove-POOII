@@ -1,7 +1,5 @@
 package onmove.model.dao;
-//package outros.model.dao;
 
-import onmove.model.dao.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +25,7 @@ public class ItemDeAluguelDAO {
     }
 
     public boolean inserir(ItemDeAluguel itemDeAluguel) {
-        String sql = "INSERT INTO itensdealuguel(quantidade, valor, cdProduto, cdAluguel) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO itensdealuguel(quantidade, valor, cdBicicleta, cdAluguel) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, itemDeAluguel.getQuantidade());
@@ -74,20 +72,20 @@ public class ItemDeAluguelDAO {
                 itemDeAluguel.setQuantidade(resultado.getInt("quantidade"));
                 itemDeAluguel.setValor(resultado.getDouble("valor"));
                 
-                bicicleta.setCdBicicleta(resultado.getInt("cdProduto"));
+                bicicleta.setCdBicicleta(resultado.getInt("cdBicicleta"));
                 aluguel.setCdAluguel(resultado.getInt("cdAluguel"));
                 
-                //Obtendo os dados completos do Produto associado ao Item de Venda
+                //Obtendo os dados completos do Bicicleta associado ao Item de Venda
                 BicicletaDAO bicicletaDAO = new BicicletaDAO();
                 bicicletaDAO.setConnection(connection);
                 bicicleta = bicicletaDAO.buscar(bicicleta);
                 
-                AluguelDAO vendaDAO = new AluguelDAO();
-                vendaDAO.setConnection(connection);
-                aluguel = vendaDAO.buscar(aluguel);
+                AluguelDAO aluguelDAO = new AluguelDAO();
+                aluguelDAO.setConnection(connection);
+                aluguel = aluguelDAO.buscar(aluguel);
                 
                 itemDeAluguel.setBicicleta(bicicleta);
-                itemDeAluguel.setVenda(aluguel);
+                itemDeAluguel.setAluguel(aluguel);
                 
                 retorno.add(itemDeAluguel);
             }
@@ -115,13 +113,13 @@ public class ItemDeAluguelDAO {
                 bicicleta.setCdBicicleta(resultado.getInt("cdBicicleta"));
                 a.setCdAluguel(resultado.getInt("cdAluguel"));
                 
-                //Obtendo os dados completos do Produto associado ao Item de Venda
+                //Obtendo os dados completos do Bicicleta associado ao Item de Venda
                 BicicletaDAO bicicletaDAO = new BicicletaDAO();
                 bicicletaDAO.setConnection(connection);
                 bicicleta = bicicletaDAO.buscar(bicicleta);
                 
                 itemDeAluguel.setBicicleta(bicicleta);
-                itemDeAluguel.setVenda(a);
+                itemDeAluguel.setAluguel(a);
                 
                 retorno.add(itemDeAluguel);
             }
@@ -158,7 +156,7 @@ public class ItemDeAluguelDAO {
                 aluguel = aluguelDAO.buscar(aluguel);
                 
                 itemDeAluguel.setBicicleta(bicicleta);
-                itemDeAluguel.setVenda(aluguel);
+                itemDeAluguel.setAluguel(aluguel);
                 
                 retorno = itemDeAluguel;
             }

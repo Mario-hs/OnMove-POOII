@@ -1,6 +1,7 @@
 package onmove.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import onmove.model.domain.Cliente;
 
 public class ClienteDAO {
@@ -23,12 +25,13 @@ public class ClienteDAO {
     }
 
     public boolean inserir(Cliente cliente) {
-        String sql = "INSERT INTO clientes(nome, cpf, telefone) VALUES(?,?,?)";
+        String sql = "INSERT INTO clientes(nome, cpf, data_nasc, telefone) VALUES (?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
-            stmt.setString(3, cliente.getTelefone());
+            stmt.setDate(3, Date.valueOf(cliente.getDataNascimento()));
+            stmt.setString(4, cliente.getTelefone());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -38,13 +41,15 @@ public class ClienteDAO {
     }
 
     public boolean alterar(Cliente cliente) {
-        String sql = "UPDATE clientes SET nome=?, cpf=?, telefone=? WHERE cdCliente=?";
+        String sql = "UPDATE clientes SET nome=?, cpf=?, data_nasc=?,telefone=?, divida=?,  WHERE cdCliente=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
-            stmt.setString(3, cliente.getTelefone());
-            stmt.setInt(4, cliente.getCdCliente());
+            stmt.setDate(3, Date.valueOf(cliente.getDataNascimento()));
+            stmt.setString(4, cliente.getTelefone());
+            stmt.setString(5, cliente.getDivida());
+            stmt.setInt(6, cliente.getCdCliente());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -61,6 +66,9 @@ public class ClienteDAO {
             stmt.execute();
             return true;
         } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Não foi possível remover usuário! Este usuário tem pendências!");
+            alert.show();
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -77,7 +85,9 @@ public class ClienteDAO {
                 cliente.setCdCliente(resultado.getInt("cdCliente"));
                 cliente.setNome(resultado.getString("nome"));
                 cliente.setCpf(resultado.getString("cpf"));
+                cliente.setDataNascimento(resultado.getDate("data_nasc").toLocalDate());
                 cliente.setTelefone(resultado.getString("telefone"));
+                cliente.setDivida(resultado.getString("divida"));
                 retorno.add(cliente);
             }
         } catch (SQLException ex) {
@@ -96,7 +106,9 @@ public class ClienteDAO {
             if (resultado.next()) {
                 cliente.setNome(resultado.getString("nome"));
                 cliente.setCpf(resultado.getString("cpf"));
+                cliente.setDataNascimento(resultado.getDate("data_nasc").toLocalDate());
                 cliente.setTelefone(resultado.getString("telefone"));
+                cliente.setDivida(resultado.getString("divida"));
                 retorno = cliente;
             }
         } catch (SQLException ex) {

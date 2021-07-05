@@ -91,7 +91,7 @@ public class FXMLClientesController implements Initializable {
     }
 
     @FXML
-    public void handleButtonRemover() throws IOException {
+    public void handleButtonRemover() {
         Cliente cliente = tableViewClientes.getSelectionModel().getSelectedItem();
         if (cliente != null) {
             clienteDAO.remover(cliente);
@@ -107,7 +107,7 @@ public class FXMLClientesController implements Initializable {
     public void handleButtonDetalhes() throws IOException {
         Cliente cliente = tableViewClientes.getSelectionModel().getSelectedItem();
         if (cliente != null) {
-            boolean buttonConfirmarClicked = showFXMLAnchorPaneDetalhesClientes(cliente);
+            boolean buttonConfirmarClicked = showFXMLDetalhesClientes(cliente);
             if (buttonConfirmarClicked) {
                 clienteDAO.buscar(cliente);
                 carregarTableViewCliente();
@@ -127,6 +127,7 @@ public class FXMLClientesController implements Initializable {
         // Criando um Estágio de Diálogo (Stage Dialog)
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Cadastro de Clientes");
+        dialogStage.setResizable(false);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
@@ -141,13 +142,14 @@ public class FXMLClientesController implements Initializable {
         return controller.isButtonConfirmarClicked();
     }
 
-    public boolean showFXMLAnchorPaneDetalhesClientes(Cliente cliente) throws IOException {
+    public boolean showFXMLDetalhesClientes(Cliente cliente) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLDetalhesClienteController.class.getResource("/onmove/view/FXMLDetalhesCliente.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
         
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Detalhes do Cliente");
+        dialogStage.setResizable(false);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 

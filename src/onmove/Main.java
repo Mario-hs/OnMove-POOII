@@ -19,7 +19,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 800, 550);
         
         stage.setScene(scene);
-        stage.setTitle("Sistema de Vendas (ON MOVE)");
+        stage.setTitle("ON MOVE - Alugues de Bicicletas");
         stage.setResizable(false);
         stage.show();
         setStage(stage);

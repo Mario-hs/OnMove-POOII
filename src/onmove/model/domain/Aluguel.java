@@ -1,8 +1,6 @@
-//package outros.model.domain;
 package onmove.model.domain;
 
 
-import onmove.model.domain.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +8,8 @@ import java.util.List;
 public class Aluguel implements Serializable {
 
     private int cdAluguel;
-    private LocalDate data;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
     private double valor;
     private boolean pago;
     private List<ItemDeAluguel> itensDeAluguel;
@@ -19,9 +18,10 @@ public class Aluguel implements Serializable {
     public Aluguel() {
     }
 
-    public Aluguel(int cdaluguel, LocalDate data, double valor, boolean pago) {
-        this.cdAluguel = cdaluguel;
-        this.data = data;
+    public Aluguel(int cdAluguel, LocalDate dataEmprestimo, LocalDate dataDevolucao, double valor, boolean pago) {
+        this.cdAluguel = cdAluguel;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
         this.valor = valor;
         this.pago = pago;
     }
@@ -33,13 +33,21 @@ public class Aluguel implements Serializable {
     public void setCdAluguel(int cdAluguel) {
         this.cdAluguel = cdAluguel;
     }
-
-    public LocalDate getData() {
-        return data;
+    
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 
     public double getValor() {
@@ -65,7 +73,7 @@ public class Aluguel implements Serializable {
     public void setItensDeAluguel(List<ItemDeAluguel> itensDeAluguel) {
         this.itensDeAluguel = itensDeAluguel;
     }
-
+    
     public Cliente getCliente() {
         return cliente;
     }

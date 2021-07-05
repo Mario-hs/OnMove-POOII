@@ -62,9 +62,6 @@ public class FXMLCadastrarClientesController implements Initializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        this.textFieldClienteNome.setText(cliente.getNome());
-        this.textFieldClienteCPF.setText(cliente.getCpf());
-        this.textFieldClienteTelefone.setText(cliente.getTelefone());
     }
 
     @FXML
@@ -74,6 +71,7 @@ public class FXMLCadastrarClientesController implements Initializable {
 
             cliente.setNome(textFieldClienteNome.getText());
             cliente.setCpf(textFieldClienteCPF.getText());
+            cliente.setDataNascimento(datePickerClienteDataDeNascimento.getValue());
             cliente.setTelefone(textFieldClienteTelefone.getText());
 
             buttonConfirmarClicked = true;
@@ -96,6 +94,9 @@ public class FXMLCadastrarClientesController implements Initializable {
         }
         if (textFieldClienteCPF.getText() == null || textFieldClienteCPF.getText().length() == 0) {
             errorMessage += "CPF inválido!\n";
+        }
+        if (datePickerClienteDataDeNascimento.getValue() == null) {
+            errorMessage += "Data inválida!\n";
         }
         if (textFieldClienteTelefone.getText() == null || textFieldClienteTelefone.getText().length() == 0) {
             errorMessage += "Telefone inválido!\n";

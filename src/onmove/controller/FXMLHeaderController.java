@@ -28,10 +28,10 @@ public class FXMLHeaderController implements Initializable {
     private MenuItem menuItemProcessosDevolucao;
     
     @FXML
-    private MenuItem menuItemGraficosAluguelPorMes;
+    private MenuItem menuItemProcessosMulta;
     
     @FXML
-    private MenuItem menuItemGraficosAluguelPorAno;
+    private MenuItem menuItemGraficosAluguelPorMes;
     
     @FXML
     private MenuItem menuItemGraficosAluguelPorCliente;
@@ -44,26 +44,53 @@ public class FXMLHeaderController implements Initializable {
         
     @FXML
     private MenuItem menuItemRelatorioQuantidadeBicicletasDisponiveis;
-   
-    @FXML
-    private AnchorPane anchorPane;
     
     @FXML
     private AnchorPane anchorPaneBody;
-    
-    @FXML
-    private AnchorPane anchorPaneHeader;
-    
-    @FXML
-    private AnchorPane anchorPaneButtons;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
     
+    public void handleScreen(String opcao) throws IOException {
+         switch (opcao){
+            case "clientes": 
+                handleCadastrosClientes();
+               break;
+            case "bicicletas":
+                handleCadastrosBicicletas();
+               break;
+            case "alugueis": 
+                handleProcessosAluguel();
+               break;
+            case "devolucoes":
+                handleProcessosDevolucao();
+               break;
+            case "multas": 
+                handleProcessosMulta();
+               break;
+            case "graficoPorMes": 
+                handleGraficosAluguelPorMes();
+               break;
+            case "graficoPorCliente":
+               handleGraficosAluguelPorCliente();
+               break;
+            case "bicicletasAlugadas": 
+                 handleRelatoriosQuantidadeBicicletasAlugadas();
+                break;
+            case "bicicletasDisponiveis":
+                handleRelatoriosQuantidadeBicicletasDisponiveis();
+               break;
+            case "bicicletasCadastradas": 
+                handleRelatoriosQuantidadeBicicletasCadastradas();
+               break;
+        }
+    }
+    
     @FXML
     public void handleHome() throws IOException{
+        System.out.println("voltar");
         AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHome.fxml"));
         anchorPaneBody.getChildren().setAll(body);
     }
@@ -87,21 +114,26 @@ public class FXMLHeaderController implements Initializable {
     }
     
      @FXML
-    public void handleMenuItemProcessosDevolucao() throws IOException{
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneProcessosVendas.fxml"));
-//        anchorPane.getChildren().setAll(a);
+    public void handleProcessosDevolucao() throws IOException{
+        AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLDevolucoes.fxml"));
+        anchorPaneBody.getChildren().setAll(body);
+    }
+    
+    @FXML
+    public void handleProcessosMulta() throws IOException{
+//        AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLMulta.fxml"));
+//        anchorPaneBody.getChildren().setAll(body);
 //              MONTAR TELA
     }
     
-    
     @FXML
-    public void handleMenuItemGraficosAluguelPorMes() throws IOException{
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneGraficosVendasPorMes.fxml"));
-//        anchorPane.getChildren().setAll(a);
+    public void handleGraficosAluguelPorMes() throws IOException{
+        AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLGraficoAluguelPorMes.fxml"));
+        anchorPaneBody.getChildren().setAll(body);
     } 
 
     @FXML
-    public void handleMenuItemGraficosAluguelPorAno() throws IOException{
+    public void handleGraficosAluguelPorCliente() throws IOException{
 //        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneGraficosVendasPorMes.fxml"));
 //        anchorPane.getChildren().setAll(a);
 //              MONTAR TELA
@@ -109,33 +141,20 @@ public class FXMLHeaderController implements Initializable {
     }
     
     @FXML
-    public void handleMenuItemGraficosAluguelPorCliente() throws IOException{
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneGraficosVendasPorMes.fxml"));
-//        anchorPane.getChildren().setAll(a);
-//              MONTAR TELA
-
+    public void handleRelatoriosQuantidadeBicicletasAlugadas() throws IOException{
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLRelatoriosQuantidadeBicicletasAlugadas.fxml"));
+        anchorPaneBody.getChildren().setAll(a);
     }
     
     @FXML
-    public void handleMenuItemRelatoriosQuantidadeBicicletas() throws IOException{
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneRelatoriosQuantidadeProdutos.fxml"));
-//        anchorPane.getChildren().setAll(a);
-    }
+    public void handleRelatoriosQuantidadeBicicletasDisponiveis() throws IOException{
+        AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLRelatoriosQuantidadeBicicletasDisponiveis.fxml"));
+        anchorPaneBody.getChildren().setAll(body);
+    }   
     
     @FXML
-    public void handleMenuItemRelatoriosQuantidadeBicicletasAlugadas() throws IOException{
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneRelatoriosQuantidadeProdutos.fxml"));
-//        anchorPane.getChildren().setAll(a);
-//              MONTAR TELA
-
-    }
-    
-    @FXML
-    public void handleMenuItemRelatoriosQuantidadeBicicletasDisponiveis() throws IOException{
-//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneRelatoriosQuantidadeProdutos.fxml"));
-//        anchorPane.getChildren().setAll(a);
-//              MONTAR TELA
-
-    }    
-    
+    public void handleRelatoriosQuantidadeBicicletasCadastradas() throws IOException{
+        AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLRelatoriosQuantidadeBicicletasCadastradas.fxml"));
+        anchorPaneBody.getChildren().setAll(body);
+    } 
 }

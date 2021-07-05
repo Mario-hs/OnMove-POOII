@@ -28,8 +28,6 @@ public class FXMLBicicletasController implements Initializable {
     @FXML
     private TableColumn<Bicicleta, String> tableColumnBicicletaNome;
     @FXML
-    private TableColumn<Bicicleta, String> tableColumnBicicletaModelo;
-    @FXML
     private TableColumn<Bicicleta, String> tableColumnBicicletaPreco;
     @FXML
     private TableColumn<Bicicleta, String> tableColumnBicicletaQuantidade;
@@ -49,7 +47,6 @@ public class FXMLBicicletasController implements Initializable {
     
     public void carregarTableViewBicicleta() {
         tableColumnBicicletaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnBicicletaModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
         tableColumnBicicletaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
         tableColumnBicicletaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 
@@ -123,6 +120,7 @@ public class FXMLBicicletasController implements Initializable {
         // Criando um Estágio de Diálogo (Stage Dialog)
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Cadastrar Bicicletas");
+        dialogStage.setResizable(false);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
@@ -139,25 +137,25 @@ public class FXMLBicicletasController implements Initializable {
     }
 
     public boolean showFXMLDetalhesBicicleta(Bicicleta bicicleta) throws IOException {
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(FXMLDetalhesBicicletaController.class.getResource("/onmove/view/FXMLDetalhesBicicleta.fxml"));
-//        AnchorPane page = (AnchorPane) loader.load();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(FXMLDetalhesBicicletaController.class.getResource("/onmove/view/FXMLDetalhesBicicleta.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
         
-//        Stage dialogStage = new Stage();
-//        dialogStage.setTitle("Detalhes da Bicicleta");
-//        Scene scene = new Scene(page);
-//        dialogStage.setScene(scene);
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Detalhes da Bicicleta");
+        dialogStage.setResizable(false);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
 
         // Setando o cliente no Controller.
-//        FXMLDetalhesBicicletaController controller = loader.getController();
-//        controller.setDialogStage(dialogStage);
-//        controller.setCliente(bicicleta);
+        FXMLDetalhesBicicletaController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setBicicleta(bicicleta);
         
         // Mostra o Dialog e espera até que o usuário o feche
-//        dialogStage.showAndWait();
+        dialogStage.showAndWait();
         
-//        return controller.isButtonConfirmarClicked();
-        return true;
+        return controller.isButtonConfirmarClicked();
     }
 
     

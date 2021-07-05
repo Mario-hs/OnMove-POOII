@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="onmove.controller.FXMLDevolucoesController">
+   <children>
+      <TableView fx:id="tableViewDevolucoes" layoutX="159.0" maxWidth="480.0" minWidth="480.0" prefHeight="440.0" prefWidth="480.0" style="-fx-background-color: none;">
+         <columns>
+            <TableColumn fx:id="tableColumnCodigo" maxWidth="80.0" minWidth="80.0" text="Código" />
+            <TableColumn fx:id="tableColumnDataDevolucao" maxWidth="165.0" minWidth="165.0" prefWidth="165.0" text="Data de Devolução" />
+            <TableColumn fx:id="tableColumnCliente" maxWidth="233.0" minWidth="232.0" prefWidth="233.0" text="Cliente" />
+         </columns>
+      </TableView>
+      <AnchorPane id="AnchorPane" layoutY="450.0" prefHeight="50.0" prefWidth="800.0" styleClass="mainFxmlClass">
+         <children>
+            <Button fx:id="buttonDetalhes" layoutX="520.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleButtonDetalhes" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #5965E0;" text="Detalhes" textFill="WHITE">
+               <font>
+                  <Font name="Montserrat Regular" size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonInserir" layoutX="193.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #5965E0;" text="Inserir" textFill="WHITE">
+               <font>
+                  <Font name="Montserrat Regular" size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonAlterar" layoutX="301.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #5965E0;" text="Alterar" textFill="WHITE">
+               <font>
+                  <Font name="Montserrat Regular" size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonRemover" layoutX="409.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #5965E0;" text="Remover" textFill="WHITE">
+               <font>
+                  <Font name="Montserrat Regular" size="11.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

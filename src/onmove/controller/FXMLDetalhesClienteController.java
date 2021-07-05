@@ -1,6 +1,7 @@
 package onmove.controller;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,10 @@ public class FXMLDetalhesClienteController implements Initializable {
     private Label labelClienteCPF;
     @FXML
     private Label labelClienteTelefone;
+    @FXML
+    private Label labelClienteDataNascimento;
+    @FXML
+    private Label labelClienteDivida;
     @FXML
     private Button buttonFechar;
 
@@ -57,7 +62,10 @@ public class FXMLDetalhesClienteController implements Initializable {
         this.labelClienteCodigo.setText(String.valueOf(cliente.getCdCliente()));
         this.labelClienteNome.setText(cliente.getNome());
         this.labelClienteCPF.setText(cliente.getCpf());
+        this.labelClienteDataNascimento.setText(String.valueOf(cliente.getDataNascimento()));
+        this.labelClienteDataNascimento.setText(String.valueOf(cliente.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
         this.labelClienteTelefone.setText(cliente.getTelefone());
+        this.labelClienteDivida.setText(cliente.getDivida());
     }
 
 

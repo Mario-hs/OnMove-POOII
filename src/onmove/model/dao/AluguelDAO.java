@@ -1,5 +1,4 @@
 package onmove.model.dao;
-//package outros.model.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import onmove.model.dao.ClienteDAO;
+import javafx.scene.control.Alert;
 import onmove.model.domain.Cliente;
 import onmove.model.domain.ItemDeAluguel;
 import onmove.model.domain.Aluguel;
@@ -30,13 +29,14 @@ public class AluguelDAO {
     }
 
     public boolean inserir(Aluguel aluguel) {
-        String sql = "INSERT INTO aluguel(data, valor, pago, cdCliente) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO alugueis (data_emprestimo, data_devolucao, valor, pago, cdCliente) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setDate(1, Date.valueOf(aluguel.getData()));
-            stmt.setDouble(2, aluguel.getValor());
-            stmt.setBoolean(3, aluguel.getPago());
-            stmt.setInt(4, aluguel.getCliente().getCdCliente());
+            stmt.setDate(1, Date.valueOf(aluguel.getDataEmprestimo()));
+            stmt.setDate(2, Date.valueOf(aluguel.getDataDevolucao()));
+            stmt.setDouble(3, aluguel.getValor());
+            stmt.setBoolean(4, aluguel.getPago());
+            stmt.setInt(5, aluguel.getCliente().getCdCliente());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -46,14 +46,15 @@ public class AluguelDAO {
     }
 
     public boolean alterar(Aluguel aluguel) {
-        String sql = "UPDATE clientes SET data=?, valor=?, pago=?, cdCliente=? WHERE cdAluguel=?";
+        String sql = "UPDATE alugueis SET data_emprestimo=?, data_devolucao=?, valor=?, pago=?, cdCliente=? WHERE cdAluguel=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setDate(1, Date.valueOf(aluguel.getData()));
-            stmt.setDouble(2, aluguel.getValor());
-            stmt.setBoolean(3, aluguel.getPago());
-            stmt.setInt(4, aluguel.getCliente().getCdCliente());
-            stmt.setInt(5, aluguel.getCdAluguel());
+            stmt.setDate(1, Date.valueOf(aluguel.getDataEmprestimo()));
+            stmt.setDate(2, Date.valueOf(aluguel.getDataDevolucao()));
+            stmt.setDouble(3, aluguel.getValor());
+            stmt.setBoolean(4, aluguel.getPago());
+            stmt.setInt(5, aluguel.getCliente().getCdCliente());
+            stmt.setInt(6, aluguel.getCdAluguel());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -63,20 +64,23 @@ public class AluguelDAO {
     }
 
     public boolean remover(Aluguel aluguel) {
-        String sql = "DELETE FROM vendas WHERE cdVenda=?";
+        String sql = "DELETE FROM alugueis WHERE cdAluguel=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, aluguel.getCdAluguel());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Não foi possível remover aluguel!");
+            alert.show();
             Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
 
     public List<Aluguel> listar() {
-        String sql = "SELECT * FROM aluguel";
+        String sql = "SELECT * FROM alugueis";
         List<Aluguel> retorno = new ArrayList<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -87,17 +91,18 @@ public class AluguelDAO {
                 List<ItemDeAluguel> itensDeAluguel = new ArrayList();
 
                 aluguel.setCdAluguel(resultado.getInt("cdAluguel"));
-                aluguel.setData(resultado.getDate("data").toLocalDate());
+                aluguel.setDataEmprestimo(resultado.getDate("data_emprestimo").toLocalDate());
+                aluguel.setDataDevolucao(resultado.getDate("data_devolucao").toLocalDate());
                 aluguel.setValor(resultado.getDouble("valor"));
                 aluguel.setPago(resultado.getBoolean("pago"));
                 cliente.setCdCliente(resultado.getInt("cdCliente"));
 
-                //Obtendo os dados completos do Cliente associado à Venda
+                //Obtendo os dados completos do Cliente associado à Aluguel
                 ClienteDAO clienteDAO = new ClienteDAO();
                 clienteDAO.setConnection(connection);
                 cliente = clienteDAO.buscar(cliente);
 
-                //Obtendo os dados completos dos Itens de Venda associados à Venda
+                //Obtendo os dados completos dos Itens de Venda associados à Aluguel
                 ItemDeAluguelDAO itemDeAluguelDAO = new ItemDeAluguelDAO();
                 itemDeAluguelDAO.setConnection(connection);
                 itensDeAluguel = itemDeAluguelDAO.listarPorAluguel(aluguel);
@@ -113,7 +118,7 @@ public class AluguelDAO {
     }
 
     public Aluguel buscar(Aluguel aluguel) {
-        String sql = "SELECT * FROM aluguel WHERE cdAluguel=?";
+        String sql = "SELECT * FROM alugueis WHERE cdAluguel=?";
         Aluguel retorno = new Aluguel();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -122,10 +127,15 @@ public class AluguelDAO {
             if (resultado.next()) {
                 Cliente cliente = new Cliente();
                 aluguel.setCdAluguel(resultado.getInt("cdAluguel"));
-                aluguel.setData(resultado.getDate("data").toLocalDate());
+                aluguel.setDataEmprestimo(resultado.getDate("data_emprestimo").toLocalDate());
                 aluguel.setValor(resultado.getDouble("valor"));
                 aluguel.setPago(resultado.getBoolean("pago"));
                 cliente.setCdCliente(resultado.getInt("cdCliente"));
+                
+                ClienteDAO clienteDAO = new ClienteDAO();
+                clienteDAO.setConnection(connection);
+                cliente = clienteDAO.buscar(cliente);
+                
                 aluguel.setCliente(cliente);
                 retorno = aluguel;
             }
@@ -134,9 +144,9 @@ public class AluguelDAO {
         }
         return retorno;
     }
-
+    
     public Aluguel buscarUltimoAluguel() {
-        String sql = "SELECT max(cdAluguel) FROM aluguel";
+        String sql = "SELECT max(cdAluguel) FROM alugueis";
         Aluguel retorno = new Aluguel();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -153,7 +163,7 @@ public class AluguelDAO {
     }
 
     public Map<Integer, ArrayList> listarQuantidadeAluguelPorMes() {
-        String sql = "select count(cdAluguel), extract(year from data) as ano, extract(month from data) as mes from aluguel group by ano, mes order by ano, mes";
+        String sql = "select count(cdAluguel), extract(year from data_emprestimo) as ano, extract(month from data_emprestimo) as mes from alugueis group by ano, mes order by ano, mes";
         Map<Integer, ArrayList> retorno = new HashMap();
         
         try {
@@ -174,6 +184,44 @@ public class AluguelDAO {
                 }
             }
             return retorno;
+        } catch (SQLException ex) {
+            Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    
+    
+     public  Aluguel buscarPorCliente(Cliente cliente) {
+        String sql = "SELECT * FROM alugueis WHERE alugueis.cdCliente=?";
+        Aluguel retorno = new Aluguel();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, cliente.getCdCliente());
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                Aluguel aluguel = new Aluguel();
+                ItemDeAluguel itemDeAluguel = new ItemDeAluguel();
+                List<ItemDeAluguel> itensDeAluguel = new ArrayList();
+                
+                aluguel.setCdAluguel(resultado.getInt("cdAluguel"));
+                aluguel.setDataDevolucao(resultado.getDate("data_devolucao").toLocalDate());
+                itemDeAluguel.setValor(resultado.getDouble("valor"));
+//                itemDeAluguel.setQuantidade(resultado.getInt("quantidade"));
+                aluguel.setPago(resultado.getBoolean("pago"));
+                System.out.println(aluguel.getCdAluguel());
+                System.out.println(cliente.getNome());
+                System.out.println(aluguel.getDataDevolucao());
+                
+                //Obtendo os dados completos dos Itens de Venda associados à Aluguel
+                ItemDeAluguelDAO itemDeAluguelDAO = new ItemDeAluguelDAO();
+                itemDeAluguelDAO.setConnection(connection);
+                itensDeAluguel = itemDeAluguelDAO.listarPorAluguel(aluguel);
+                
+                System.out.println(itemDeAluguelDAO.listarPorAluguel(aluguel));
+                aluguel.setCliente(cliente);
+//                aluguel.setItensDeAluguel(itensDeAluguel);
+                retorno = aluguel;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AluguelDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -23,11 +23,15 @@ import onmove.model.database.DatabaseFactory;
 
 public class FXMLCadastrarBicicletasController implements Initializable {
     @FXML
+    private TextField textFieldNome;
+    @FXML
     private ComboBox comboBoxMarca;
     @FXML 
     private ComboBox comboBoxModelo;
     @FXML
     private TextField textFieldPreco;
+    @FXML
+    private TextField textFieldQuantidade;
     @FXML
     private Button buttonConfirmar;
     @FXML
@@ -87,20 +91,19 @@ public class FXMLCadastrarBicicletasController implements Initializable {
         return bicicleta;
     }
 
-    public void setBicicleta(Bicicleta cliente) {
-       
+    public void setBicicleta(Bicicleta bicicleta) {
+       this.bicicleta = bicicleta;
     }
 
     @FXML
     public void handleButtonConfirmar() {
 
         if (validarEntradaDeDados()) {
-
-//            bicicleta.setMarca((Marca) comboBoxMarca.getSelectionModel().getSelectedItem());
+            bicicleta.setNome(textFieldNome.getText());
+            bicicleta.setPreco(Double.parseDouble(textFieldPreco.getText()));
+            bicicleta.setQuantidade(Integer.parseInt(textFieldQuantidade.getText()));
+            bicicleta.setMarca((Marca) comboBoxMarca.getSelectionModel().getSelectedItem());
             bicicleta.setModelo((Modelo) comboBoxModelo.getSelectionModel().getSelectedItem());
-
-//            bicicleta.setPreco(textFieldPreco.getText());
-
             buttonConfirmarClicked = true;
             dialogStage.close();
         }
@@ -115,6 +118,15 @@ public class FXMLCadastrarBicicletasController implements Initializable {
     //Validar entrada de dados para o cadastro
     private boolean validarEntradaDeDados() {
         String errorMessage = "";
+        if (textFieldNome.getText() == null || textFieldNome.getText().length() <= 2) {
+            errorMessage += "Nome inválido!\n";
+        }
+        if (textFieldPreco.getText() == null || textFieldPreco.getText().length() <= 0) {
+            errorMessage += "Preço inválido!\n";
+        }
+        if (textFieldQuantidade.getText() == null || textFieldQuantidade.getText().length() < 1) {
+            errorMessage += "Quantidade inválido!\n";
+        }
         if (comboBoxMarca.getSelectionModel().getSelectedItem() == null) {
             errorMessage += "Marca inválida!\n";
         }

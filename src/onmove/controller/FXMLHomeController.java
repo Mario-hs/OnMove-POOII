@@ -6,12 +6,14 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import onmove.Main;
 
 public class FXMLHomeController implements Initializable {
@@ -28,10 +30,10 @@ public class FXMLHomeController implements Initializable {
     private MenuItem menuItemProcessosDevolucao;
     
     @FXML
-    private MenuItem menuItemGraficosAluguelPorMes;
+    private MenuItem menuItemProcessosMulta;
     
     @FXML
-    private MenuItem menuItemGraficosAluguelPorAno;
+    private MenuItem menuItemGraficosAluguelPorMes;
     
     @FXML
     private MenuItem menuItemGraficosAluguelPorCliente;
@@ -50,15 +52,6 @@ public class FXMLHomeController implements Initializable {
    
     @FXML
     private AnchorPane anchorPane;
-    
-    @FXML
-    private AnchorPane anchorPaneBody;
-    
-    @FXML
-    private AnchorPane anchorPaneHeader;
-    
-    @FXML
-    private AnchorPane anchorPaneButtons;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -77,66 +70,70 @@ public class FXMLHomeController implements Initializable {
         Main.getStage().close();
     }
     
+    public void selectionScreen(String opcao) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(FXMLHeaderController.class.getResource("/onmove/view/FXMLHeader.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+        
+        // Criando um Estágio de Diálogo (Stage Dialog)
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("ON MOVE - Alugues de Bicicletas");
+        dialogStage.setResizable(false);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        
+        FXMLHeaderController controller = loader.getController();
+        controller.handleScreen(opcao);
+        dialogStage.showAndWait();
+    }
+    
     @FXML
     public void handleCadastrosClientes() throws IOException{
-        AnchorPane header = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHeader.fxml"));
-        anchorPane.getChildren().setAll(header);
+        selectionScreen("clientes");
     }
     
     @FXML
     public void handleCadastrosBicicletas() throws IOException {
-        AnchorPane header = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHeader.fxml"));
-        anchorPane.getChildren().setAll(header);
+        selectionScreen("bicicletas");
     }
     
     @FXML
     public void handleProcessosAluguel() throws IOException{
-        AnchorPane header = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHeader.fxml"));
-        anchorPane.getChildren().setAll(header);
+        selectionScreen("alugueis");
     }
-    
-     @FXML
-    public void handleMenuItemProcessosDevolucao() throws IOException{
-        AnchorPane header = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHeader.fxml"));
-        anchorPane.getChildren().setAll(header);
-    }
-    
     
     @FXML
-    public void handleMenuItemGraficosAluguelPorMes() throws IOException{
-        AnchorPane header = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHeader.fxml"));
-        anchorPane.getChildren().setAll(header);
+    public void handleProcessosDevolucao() throws IOException{
+        selectionScreen("devolucoes");
+    }
+    
+    @FXML
+    public void handleProcessosMulta() throws IOException{
+        selectionScreen("multas");
+    }
+    
+    @FXML
+    public void handleGraficosAluguelPorMes() throws IOException{
+        selectionScreen("graficoPorMes");
     } 
-
+    
     @FXML
-    public void handleMenuItemGraficosAluguelPorAno() throws IOException{
-        AnchorPane header = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLHeader.fxml"));
-        anchorPane.getChildren().setAll(header);
+    public void handleGraficosAluguelPorCliente() throws IOException{
+        selectionScreen("graficoPorCliente");
     }
     
     @FXML
-    public void handleMenuItemGraficosAluguelPorCliente() throws IOException{
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneGraficosVendasPorMes.fxml"));
-        anchorPane.getChildren().setAll(a);
+    public void handleRelatoriosQuantidadeBicicletasAlugadas() throws IOException{
+        selectionScreen("bicicletasAlugadas");
     }
     
     @FXML
-    public void handleMenuItemRelatoriosQuantidadeBicicletas() throws IOException{
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneRelatoriosQuantidadeProdutos.fxml"));
-        anchorPane.getChildren().setAll(a);
+    public void handleRelatoriosQuantidadeBicicletasDisponiveis() throws IOException{
+        selectionScreen("bicicletasDisponiveis");
     }
-    
+     
     @FXML
-    public void handleMenuItemRelatoriosQuantidadeBicicletasAlugadas() throws IOException{
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneRelatoriosQuantidadeProdutos.fxml"));
-        anchorPane.getChildren().setAll(a);
+    public void handleRelatoriosQuantidadeBicicletasCadastradas() throws IOException{
+        selectionScreen("bicicletasCadastradas");
     }
-    
-    @FXML
-    public void handleMenuItemRelatoriosQuantidadeBicicletasDisponiveis() throws IOException{
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLAnchorPaneRelatoriosQuantidadeProdutos.fxml"));
-        anchorPane.getChildren().setAll(a);
-    }
-    
-    
 }

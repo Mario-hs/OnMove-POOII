@@ -22,46 +22,6 @@ public class MarcaDAO {
         this.connection = connection;
     }
 
-    public boolean inserir(Marca marca) {
-        String sql = "INSERT INTO marcas(descricao) VALUES(?)";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, marca.getNome());
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
-    public boolean alterar(Marca marca) {
-        String sql = "UPDATE marcas SET descricao=? WHERE cdMarca=?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, marca.getNome());
-            stmt.setInt(2, marca.getCdMarca());
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
-    public boolean remover(Marca marca) {
-        String sql = "DELETE FROM marcas WHERE cdMarca=?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, marca.getCdMarca());
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
     public List<Marca> listar() {
         String sql = "SELECT * FROM marcas";
         List<Marca> retorno = new ArrayList<>();
@@ -71,7 +31,7 @@ public class MarcaDAO {
             while (resultado.next()) {
                 Marca marca = new Marca();
                 marca.setCdMarca(resultado.getInt("cdMarca"));
-                marca.setNome(resultado.getString("descricao"));
+                marca.setNome(resultado.getString("nome"));
                 retorno.add(marca);
             }
         } catch (SQLException ex) {
@@ -88,7 +48,7 @@ public class MarcaDAO {
             stmt.setInt(1, marca.getCdMarca());
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
-                marca.setNome(resultado.getString("descricao"));
+                marca.setNome(resultado.getString("nome"));
                 retorno = marca;
             }
         } catch (SQLException ex) {

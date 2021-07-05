@@ -1,6 +1,7 @@
 package onmove.model.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import javafx.stage.Stage;
 
 public class Cliente implements Serializable {
@@ -11,14 +12,19 @@ public class Cliente implements Serializable {
     private String nome;
     private String cpf;
     private String telefone;
+    private LocalDate data;
+    private String divida;
 
     public Cliente(){
     }
     
-    public Cliente(int cdCliente, String nome, String cpf) {
+    public Cliente(int cdCliente, String nome, String cpf, LocalDate data, String telefone, String divida) {
         this.cdCliente = cdCliente;
         this.nome = nome;
         this.cpf = cpf;
+        this.data = data;
+        this.telefone = telefone;
+        this.divida = divida;
     }
 
     public int getCdCliente() {
@@ -51,6 +57,22 @@ public class Cliente implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    
+    public String getDivida() {
+        return divida;
+    }
+
+    public void setDivida(String divida) {
+        this.divida = divida;
+    }
+    
+    public LocalDate getDataNascimento() {
+        return data;
+    }
+
+    public void setDataNascimento(LocalDate data) {
+        this.data = data;
     }
 
     @Override

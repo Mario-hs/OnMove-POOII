@@ -22,46 +22,6 @@ public class ModeloDAO {
         this.connection = connection;
     }
 
-    public boolean inserir(Modelo modelo) {
-        String sql = "INSERT INTO modelos(descricao) VALUES(?)";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, modelo.getDescricao());
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(ModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
-    public boolean alterar(Modelo modelo) {
-        String sql = "UPDATE modelos SET descricao=? WHERE cdModelo=?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, modelo.getDescricao());
-            stmt.setInt(2, modelo.getCdModelo());
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(ModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
-    public boolean remover(Modelo modelo) {
-        String sql = "DELETE FROM modelos WHERE cdModelo=?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, modelo.getCdModelo());
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(ModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
     public List<Modelo> listar() {
         String sql = "SELECT * FROM modelos";
         List<Modelo> retorno = new ArrayList<>();
