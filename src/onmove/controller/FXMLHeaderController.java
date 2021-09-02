@@ -45,6 +45,9 @@ public class FXMLHeaderController implements Initializable {
     @FXML
     private MenuItem menuItemRelatorioQuantidadeBicicletasDisponiveis;
     
+    @FXML 
+    private MenuItem menuItemEquipe;
+    
     @FXML
     private AnchorPane anchorPaneBody;
             
@@ -85,6 +88,9 @@ public class FXMLHeaderController implements Initializable {
             case "bicicletasCadastradas": 
                 handleRelatoriosQuantidadeBicicletasCadastradas();
                break;
+            case "equipe":
+                handleEquipe();
+                break;
         }
     }
     
@@ -157,4 +163,10 @@ public class FXMLHeaderController implements Initializable {
         AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLRelatoriosQuantidadeBicicletasCadastradas.fxml"));
         anchorPaneBody.getChildren().setAll(body);
     } 
+    
+    @FXML
+    public void handleEquipe() throws IOException{
+        AnchorPane body = (AnchorPane) FXMLLoader.load(getClass().getResource("/onmove/view/FXMLSobre.fxml"));
+        anchorPaneBody.getChildren().setAll(body);
+    }
 }

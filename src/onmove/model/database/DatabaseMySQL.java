@@ -16,7 +16,7 @@ public class DatabaseMySQL implements Database {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             // até a onmove_v6 tudo okay
-            this.connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/onmove_v6", "postgres","postgres");
+            this.connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/onmove_v7", "postgres","postgres");
             return this.connection;
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DatabasePostgreSQL.class.getName()).log(Level.SEVERE, null, ex);

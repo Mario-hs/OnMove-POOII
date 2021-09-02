@@ -48,6 +48,9 @@ public class FXMLHomeController implements Initializable {
     private MenuItem menuItemRelatorioQuantidadeBicicletasDisponiveis;
     
     @FXML
+    private MenuItem menuItemEquipe;
+    
+    @FXML
     private Button btnSair;
    
     @FXML
@@ -135,5 +138,10 @@ public class FXMLHomeController implements Initializable {
     @FXML
     public void handleRelatoriosQuantidadeBicicletasCadastradas() throws IOException{
         selectionScreen("bicicletasCadastradas");
+    }
+    
+    @FXML
+    public void handleEquipe() throws IOException{
+        selectionScreen("equipe");
     }
 }
